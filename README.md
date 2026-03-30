@@ -11,7 +11,7 @@ Many of the rules below are enforced or assisted by the tooling files in this re
 Rules that describe the way to implement.
 
 - General
-  - Friendship: **only when declaring operators** (i.e.` <`, `==`, `<<`, ...)
+  - Friendship: **only when declaring operators** (i.e. `<`, `==`, `<<`, ...)
   - Shared pointers: **only for instances of interfaces**
   - Dynamic allocation: **do not use** (i.e. no use of `new`)
   - Exceptions: **do not use**
@@ -53,13 +53,14 @@ Rules that describe the way to implement.
     - Instruction: **only one declaration per line**. This rule also applies for class members
     - Initialization: **if possible, initialize variable on declaration**. This rule also applies for class members
   - Scope: **declare the variable inside a method, a class, or a namespace**
+  - Inline variables: **only for constant** or singleton (should be avoided)
   - Pointer/Reference: **use references instead of pointers when the value is not optional**, unless the object is contained in a data structure
   - Constness: **maximize the constness of variables**
-  - Primitive type: **use only strong primitive types** _(ex: `uint32_t`, `size_t`)_
-  - Type: **use the most accurate types** _(ex: `istringstream` instead of `stringstream`)_
+  - Primitive type: **use only strong primitive types** _(e.g. `uint32_t`, `size_t`)_
+  - Type: **use the most accurate types** _(e.g. `istringstream` instead of `stringstream`)_
   - `auto` keyword: **use only for lambda, loop-variable and types that are longer than 15 characters**
 - Functions
-  - Inline functions: **only for template specialization**
+  - Inline functions: **only for template specialization**. Other inline functions should be avoided
   - Inline methods: **only for setters and getters**
   - Side effect: **avoid side effect functions**  
      Exception valid for: data structures, in-out parameters, multiple outputs
@@ -68,6 +69,7 @@ Rules that describe the way to implement.
     - Default value: **allowed**, rule TBD
     - Passing: **pass primitive types by value, pass any other types by reference**
   - Global scope functions: **do not use**, functions should be placed within a namespace or a class
+  - Static functions: **do not use**. Prefer inline functions over static functions
 - Structs
   - Usage: use structs for **mainly public attributes and methods**  
     Other rules in `Classes`
@@ -82,7 +84,6 @@ Rules that describe the way to implement.
   - Accessibility: **minimize the accessibility of the class members**
   - Constness: **maximize the constness of the member functions**
   - Static: **only for utility functions with private implementation**, use namespaces if no private implementation
-  - Singleton: **forbidden**, rule TBD
 - Namespaces
   - Usage: use namespaces **for utility functions, for libraries, for converters of enumerators, and for enumerators as flag**
   - `using` instruction: **`using namespace` instruction should be avoided** or used in a function scope or namespace scope (not in global scope)
@@ -104,8 +105,8 @@ Rules that describe the way to name.
 
 - General
   - Language: **English** only
-  - Word `number`: **do not use `number`. Use `count`, `id` or `index`** _(ex: carId instead of carNumber)_
-  - Plural: **no plural, describe as a container** _(ex: carList instead of cars)_
+  - Word `number`: **do not use `number`. Use `count`, `id` or `index`** _(e.g. carId instead of carNumber)_
+  - Plural: **no plural, describe as a container** _(e.g. carList instead of cars)_
   - File name: **same as declared/defined class**, PascalCase for class, PascalCase without leading `E` for enumerator, snake_case for namespace
   - Folder name: **denomination of the content** as PascalCase for classes and snake_case for namespaces
 - Headers
@@ -116,9 +117,9 @@ Rules that describe the way to name.
 - Variables
   - Iteration index: **`i, j, k...` are reserved name for iteration index**
   - Case: **camelCase**
-  - Naming: **same name as type in camelCase** _(ex: FileWatcher fileWatcher)_
+  - Naming: **same name as type in camelCase** _(e.g. FileWatcher fileWatcher)_
   - Boolean: **boolean variables must start with `b`, `is` or `has`**
-  - Container: **container variables must end with the type of the container** _(ex: std::map<string, int> nameAgeMap)_
+  - Container: **container variables must end with the type of the container** _(e.g. std::map<string, int> nameAgeMap)_
   - Modifiers _(as class member)_
     - Private/Protected/Public: **do not use any marker**
     - Constant: **SCREAMING_SNAKE_CASE**
@@ -137,13 +138,13 @@ Rules that describe the way to name.
 - Classes
   - Naming
     - Modifiers
-      - Interface _(only virtual pure methods)_: **PascalCase with leading `I` and trailing `able`** _(ex: IPlayable)_
+      - Interface _(only virtual pure methods)_: **PascalCase with leading `I` and trailing `able`** _(e.g. IPlayable)_
       - Abstract: **PascalCase with leading `A`**
       - Static _(only static methods)_: **do not use any marker**
       - Templated: **do not use any marker**
     - Order:
-      1. Data involved _(ex: Car, Shoe, Key)_ _(still no plural)_
-      2. Data processing method _(ex: Watcher, Cleaner, Filter)_
+      1. Data involved _(e.g. Car, Shoe, Key)_ _(still no plural)_
+      2. Data processing method _(e.g. Watcher, Cleaner, Filter)_
     - Extension: **the child class name must end with its parent class name**  
        Abbreviate the parent name if its length is greater than `15`  
        Add a comment just above the parent class to define the used abbreviation
